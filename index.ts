@@ -2,8 +2,18 @@ import * as ethers from "ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-            const wallet = ethers.Wallet.createRandom();
-            console.log(`MNEMONIC PHRASE: ${wallet.mnemonic.phrase}`);
+async function main() {
 
-console.log("Hello, Node Typescript app")
-console.log("MESSAGE: " + process.env.MESSAGE)
+const provider = new ethers.EtherscanProvider(process.env.ETH_NETWORK, process.env.ETHERSCAN_TOKEN);
+const currentBlock = await provider.getBlockNumber();
+
+console.log(`Hello, Node Web3 Typescript app from ${process.env.ETH_NETWORK} network at block ${currentBlock}`)
+
+}
+
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+});
+
+// eslint
