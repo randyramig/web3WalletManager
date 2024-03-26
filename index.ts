@@ -3,17 +3,18 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 async function main() {
+  const provider = new ethers.EtherscanProvider(
+    process.env.ETH_NETWORK,
+    process.env.ETHERSCAN_TOKEN,
+  );
+  const currentBlock = await provider.getBlockNumber();
 
-const provider = new ethers.EtherscanProvider(process.env.ETH_NETWORK, process.env.ETHERSCAN_TOKEN);
-const currentBlock = await provider.getBlockNumber();
-
-console.log(`Hello, Node Web3 Typescript app from ${process.env.ETH_NETWORK} network at block ${currentBlock}`)
-
+  console.log(
+    `Hello, Node Web3 Typescript app from ${process.env.ETH_NETWORK} network at block ${currentBlock}`,
+  );
 }
 
 main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
+  console.error(error);
+  process.exitCode = 1;
 });
-
-// eslint
